@@ -1,1 +1,20 @@
-README
+# CS2212 Project
+
+[Initial Diagrams](https://sourcespy.com/github/mrjoshua8855cs2212warehouse/xx-index-.html)
+
+## Deliverables
+ - [ ] UC1
+ 	- [ ] Use case diagram
+	- [ ] Sequence Diagram
+ - [ ] UC2
+ 	- [ ] Use case diagram
+	- [ ] Sequence Diagram
+ - [ ] UC3
+ 	- [ ] Use case diagram
+	- [ ] Sequence Diagram
+ - [ ] Implementation
+ 	- [ ] The appropriate proxies. Make sure you implement the Chain of Responsibility design pattern and the Proxy design pattern.
+	- [ ] The placeOrder and the restock methods in the Facade.java  implementing thus the Façade design pattern.
+	- [ ] The authenticate method in the appropriate proxies, upon receiving a placeOrder request implementing thus the Proxy design pattern.
+ - [ ] A complete report with the use case diagrams and the sequence diagrams for UC1, UC2, and UC3. The report has to have a cover page with your group number, your names, and your emails. There should be short but clear explanations of the diagrams. For example there should be short explanations of what the participants are in the sequence diagrams, what the messages mean, and what parameters in the messages mean. 
+ - [ ] An archive file with your project in a form that can be imported in Eclipse and tested using the input data files you should also include in the archive (i.e. the driver file, buyer_file, etc.)
