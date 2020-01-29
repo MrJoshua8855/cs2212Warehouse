@@ -38,5 +38,10 @@ public class WelcomeProxy extends Proxy {
 		Facade facade = new Facade();
 		facade.restock(restockDetails, supplier);
 	}
+	
+	private bool validate(Buyer buyer) {
+		
+	}
+	
 
 }
