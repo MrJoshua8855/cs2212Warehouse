@@ -40,7 +40,8 @@ public class WelcomeProxy extends Proxy {
 	}
 	
 	private bool validate(Buyer buyer) {
-		
+		//call database proceedure 
+		if(buyer.getUserName != "" && buyer.getPassword != "") return true;
 	}
 	
 
