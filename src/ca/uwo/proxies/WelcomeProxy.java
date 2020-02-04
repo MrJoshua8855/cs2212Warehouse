@@ -43,6 +43,9 @@ public class WelcomeProxy extends Proxy {
 		facade.restock(restockDetails, supplier);
 	}
 	
+	/* (non-Javadoc)
+	 * Validate the user against a series of proxies using the chain of responsibility pattern.	 * 
+	 */
 	private boolean validate(Buyer buyer) {
 		IValidate authenticate = new PasswordProxy(buyer);
 		 return authenticate.Validate();
