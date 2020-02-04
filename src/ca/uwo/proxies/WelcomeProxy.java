@@ -26,8 +26,12 @@ public class WelcomeProxy extends Proxy {
 	 */
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
-		Facade facade = new Facade();
-		facade.placeOrder(orderDetails, buyer);
+		
+		if(validate(buyer)) {
+			Facade facade = new Facade();
+			facade.placeOrder(orderDetails, buyer);
+		}
+		
 	}
 
 	/* (non-Javadoc)
@@ -39,9 +43,9 @@ public class WelcomeProxy extends Proxy {
 		facade.restock(restockDetails, supplier);
 	}
 	
-	private bool validate(Buyer buyer) {
-		//call database proceedure 
-		if(buyer.getUserName != "" && buyer.getPassword != "") return true;
+	private boolean validate(Buyer buyer) {
+		IValidate authenticate = new PasswordProxy(buyer);
+		 return authenticate.Validate();
 	}
 	
 

@@ -18,8 +18,8 @@ import ca.uwo.model.Item;
  * @author kkontog, ktsiouni, mgrigori
  * This class is responsible for the data persistence, i.e., database connection, updates, etc.
  */
-public class DataManager {
-	private static DataManager instance = null;
+public class BuyerManager {
+	private static BuyerManager instance = null;
 	
 	private Connection conn;
 
@@ -69,7 +69,7 @@ public class DataManager {
         String sql = "CREATE TABLE IF NOT EXISTS buyers (\n"
                 + "    id integer PRIMARY KEY,\n"
                 + "    name text NOT NULL,\n"
-                + "    password varchar NOT NULL,\n"
+                + "    password text NOT NULL,\n"
                 + "    pin integer\n"
                 + ");";
         
@@ -77,6 +77,7 @@ public class DataManager {
                 Statement stmt = conn.createStatement();
             // create a new table
             stmt.execute(sql);
+            populateUsers();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -88,9 +89,9 @@ public class DataManager {
 	 * @param password the passsword of the buyer
 	 * @return ID of the user;
 	 */
-	public int getBuyerByPassword(String userName, string password) {
-		int buyerID = null;
-		String sql = "SELECT id, name, FROM buyers WHERE name = ? AND password = ?";
+	public int getBuyerByPassword(String userName, String password) {
+		int buyerID = 0;
+		String sql = "SELECT id, name FROM buyers WHERE name = ? AND password = ?";
         
         try (PreparedStatement pstmt  = conn.prepareStatement(sql)){
             
@@ -111,38 +112,26 @@ public class DataManager {
 	 * insert a user into the database.
 	 * 
 	 */
-	public void insertUser(int id, string name, string password, int pin = 0) {
-		String sql = "INSERT INTO buyers(id,username,password, pin) VALUES(?,?,?,?)";
+	public void insertUser(int id, String name, String password) {
+		String sql = "INSERT INTO buyers(id,name,password) VALUES(?,?,?)";
 		 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, name);
-            pstmt.setString(2, username);
+            pstmt.setInt(1, id);
+            pstmt.setString(2, name);
             pstmt.setString(3, password);
-            pstmt.setInt(4, pin);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 	}
 
-	/**
-	 * there should be only one instance of UserManager class.
-	 * @return the instance of UserManager.
-	 */
-	public static UserManager getInstance() {
-		if (instance == null)
-			instance = new DataManager();
-		
-		return instance;
-	}
-	
 	private void populateUsers() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File("buyer_file")));
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] lineTokens = line.split("\t");
-				insertUser(lineTokens[0],lineTokens[1], lineTokens[2]);
+				insertUser(Integer.parseInt(lineTokens[0]),lineTokens[1], lineTokens[2]);
 			}
 			br.close();
 		} catch (IOException ioe) {
@@ -168,8 +157,7 @@ public class DataManager {
 	private BuyerManager() {
 		connect();
 		createNewDatabase();
-		createNewTable();
-		populateUsers();
+		createNewTable();		
 	}
 
 }

@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class PinProxy extends Proxy implements IValidate{
+import ca.uwo.client.Buyer;
+
+public class PinProxy implements IValidate{
 
 	
 	private Buyer _buyer;
@@ -15,7 +17,7 @@ public class PinProxy extends Proxy implements IValidate{
 		_buyer = buyer;
 	}
 	
-	public int Validate() {
+	public boolean Validate() {
 		//TODO
 		return false;
 	}

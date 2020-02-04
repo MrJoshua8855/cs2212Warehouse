@@ -1,11 +1,12 @@
 package ca.uwo.proxies;
 
+import ca.uwo.client.Buyer;
 
-public class TelephoneProxy extends Proxy implements IValidate{
+public class TelephoneProxy implements IValidate{
 	
 	private Buyer _buyer;
 	
-	public TelephoneProxt(Buyer buyer) {
+	public TelephoneProxy(Buyer buyer) {
 		_buyer = buyer;
 	}
 	

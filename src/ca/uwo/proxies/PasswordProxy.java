@@ -1,15 +1,11 @@
 package ca.uwo.proxies;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-public class PasswordProxy extends Proxy implements IValidate{
+import ca.uwo.client.Buyer;
+import ca.uwo.dataAccess.BuyerManager;
+
+public class PasswordProxy implements IValidate{
 	
-	private HashMap<> buyersList;
 	private Buyer _buyer;
 	private IValidate _next;
 	
@@ -20,10 +16,10 @@ public class PasswordProxy extends Proxy implements IValidate{
 	
 	public boolean Validate() {
 	
-		if(_buyer.getUserName != "" && _buyer.getPassword != "") {
-			BuyerManager buyerRepo = new BuyerManager.getInstance();
-			int buyerID = buyerRepo.getBuyerByPassword(_buyer.getUserName, _buyer.getPassword);
-			if(buyerID != null return true)
+		if(_buyer.getUserName() != "" && _buyer.getPassword() != "") {
+			BuyerManager buyerRepo = BuyerManager.getInstance();
+			int buyerID = buyerRepo.getBuyerByPassword(_buyer.getUserName(), _buyer.getPassword());
+			if(buyerID > 0) return true;
 				return false;
 		}
 		else {

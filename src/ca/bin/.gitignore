@@ -1,0 +1,12 @@
+/.DS_Store
+/banking/
+/client/
+/controller/
+/dataAccess/
+/driver/
+/frontend/
+/model/
+/pricingStrategies/
+/proxies/
+/utils/
+/viewer/
