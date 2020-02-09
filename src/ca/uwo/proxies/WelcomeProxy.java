@@ -26,8 +26,12 @@ public class WelcomeProxy extends Proxy {
 	 */
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
-		Facade facade = new Facade();
-		facade.placeOrder(orderDetails, buyer);
+		
+		if(validate(buyer)) {
+			Facade facade = new Facade();
+			facade.placeOrder(orderDetails, buyer);
+		}
+		
 	}
 
 	/* (non-Javadoc)
@@ -38,5 +42,14 @@ public class WelcomeProxy extends Proxy {
 		Facade facade = new Facade();
 		facade.restock(restockDetails, supplier);
 	}
+	
+	/* (non-Javadoc)
+	 * Validate the user against a series of proxies using the chain of responsibility pattern.	 * 
+	 */
+	private boolean validate(Buyer buyer) {
+		IValidate authenticate = new PasswordProxy(buyer);
+		 return authenticate.Validate();
+	}
+	
 
 }

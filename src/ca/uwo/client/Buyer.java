@@ -38,6 +38,9 @@ public class Buyer extends Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//TODO Authenticate here, proceed if pass
+		
 		System.out.println("My name is :" + this.userName + " and I'm buying : ");
 		System.out.println(orderDetails);
 		WelcomeProxy proxy = new WelcomeProxy();
