@@ -40,6 +40,7 @@ public class Buyer extends Client {
 		}
 		
 		//TODO Authenticate here, proceed if pass
+		//DO NOT AUTHENTICATE HERE IT IS INSECURE
 		
 		System.out.println("My name is :" + this.userName + " and I'm buying : ");
 		System.out.println(orderDetails);
