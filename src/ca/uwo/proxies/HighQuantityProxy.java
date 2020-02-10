@@ -30,7 +30,7 @@ public class HighQuantityProxy extends Proxy {
 			/* exit if second attempt fails */
 			else {
 				System.out.println("Sorry, but your password is incorrect. Goodbye.");
-				System.exit();
+				System.exit(0);
 			}	
 		}	
 
@@ -39,7 +39,7 @@ public class HighQuantityProxy extends Proxy {
 	/* this method should never be called but is required by Proxy */
 	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {
 		System.out.println("FAILURE IN: HighQuantityProxy\nREASON: This method should never be called.");
-		System.exit();
+		System.exit(0);
 	}
 
 

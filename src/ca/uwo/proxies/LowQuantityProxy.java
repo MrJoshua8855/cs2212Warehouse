@@ -1,5 +1,6 @@
 package ca.uwo.proxies;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -48,7 +49,7 @@ public class LowQuantityProxy extends Proxy {
 				/* exit if second attempt fails */
 				else {
 					System.out.println("Sorry, but your password is incorrect. Goodbye.");
-					System.exit();
+					System.exit(0);
 				}
 			}
 		}

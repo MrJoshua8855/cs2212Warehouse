@@ -50,8 +50,8 @@ public class Facade implements FacadeCommands {
 
 		//create invoice
 		Invoice invoice = this.controller.createInvoice();
-		//receive payment
-		this.bank = receivePayment(invoice, buyer);
+		//receive paymentk
+		this.bank.receivePayment(invoice, buyer);
 	}
 	
 	/* (non-Javadoc)
