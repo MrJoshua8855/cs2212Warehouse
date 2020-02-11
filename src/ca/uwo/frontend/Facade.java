@@ -64,7 +64,7 @@ public class Facade implements FacadeCommands {
 		System.out.println("Facade: ");
 
 		//create the order
-		Order order = createOrder(restockDetails, "what goes here?");
+		Order order = createOrder(restockDetails, "restockDaemon");
 
 		System.out.println("\tReplenishing Stock");
 
