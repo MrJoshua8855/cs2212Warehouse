@@ -14,7 +14,7 @@ public class OutOfStockState implements ItemState {
 		//prepare itemResult values and return
 		String message = "Out of Stock";
 		ResponseCode code = ResponseCode.Not_Completed;
-		
+		item.NotifyViewers();
 		return new ItemResult(message, code);
 	}
 

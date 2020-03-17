@@ -50,6 +50,7 @@ public class Item {
 
 		// When you add states to items make sure you
 		// initialize them using the proper STATE!!!!
+		this.setState();
 
 	}
 
@@ -133,6 +134,47 @@ public class Item {
 		return itemResult;
 	}
 	
+	/**
+	 * Add a viewer to this item.
+	 * 
+	 * @param The viewer to be notified of changes
+	 *            
+	 */
+	public void addViewer(Viewer v) {
+		if(!this.viewers.contains(v)) {
+			this.viewers.add(v);
+		}		
+	}
+	
+	/**
+	 * Remove a viewer from this item.
+	 * 
+	 * @param The viewer to be removed
+	 *            
+	 */
+	public void removeViewer(Viewer v) {
+		if(this.viewers.contains(v)) {
+			this.viewers.remove(v);
+		}
+		
+	}
+	
+	/**
+	 * Notify all viewers of a change
+	 * 
+	 */
+	public void notifyViewers() {
+		for(Viewer v : this.viewers){
+			v.inform(this);
+		}
+	}
+	
+
+	
+	/**
+	 * Set the appropriate current state for this item
+	 * 
+	 */
 	private void setState() {
 		int availableQuantity = this.getAvailableQuantity();
 		
