@@ -44,9 +44,8 @@ public class StockManager extends Viewer implements Runnable {
 	 */
 	@Override
 	public void inform(Item item) {
-		if(item.getAvailableQuantity() == 0) {
-			
-		}
+		int quantity = restockStrategy.calculateQuantity(item.getName(), item.getAvailableQuantity(), item.getPrice());
+		restockDetails.put(item.getName(), quantity);
 	}
 
 	// TODO make concurrent
