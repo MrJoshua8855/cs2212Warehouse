@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uwo.model.item.states.ItemState;
+import ca.uwo.model.item.states.ItemStateFactory;
 import ca.uwo.utils.ItemResult;
 import ca.uwo.utils.ResponseCode;
 import ca.uwo.viewer.Messenger;
@@ -105,6 +106,8 @@ public class Item {
 		} else {
 			availableQuantity -= quantity;
 			itemResult = new ItemResult("AVAILABLE", ResponseCode.Completed);
+			state.deplete(this, quantity);
+			this.setState();
 		}
 
 		this.setAvailableQuantity(availableQuantity);
@@ -125,7 +128,23 @@ public class Item {
 		availableQuantity += quantity;
 		this.setAvailableQuantity(availableQuantity);
 		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
+		state.replenish(this, quantity);
+		this.setState();
 		return itemResult;
+	}
+	
+	private void setState() {
+		int availableQuantity = this.getAvailableQuantity();
+		
+		if(availableQuantity <= 0) {
+			this.state = ItemStateFactory.create("OutOfStockState");
+		}
+		else if(availableQuantity < 10) {
+			this.state = ItemStateFactory.create("LowStockState");
+		}
+		else {
+			this.state = ItemStateFactory.create("InStockState");
+		}
 	}
 
 }
