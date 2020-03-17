@@ -1,7 +1,5 @@
 package ca.uwo.model.item.states;
 
-import ca.uwo.pricingStrategies.aggregate.AggregatePricingStrategy;
-
 /**
  * This class is responsible for creating different states (using Factory design pattern) 
  * which implement {@link ItemState} interface based on different contexts.
@@ -14,20 +12,19 @@ public class ItemStateFactory {
 	 */
 	public static ItemState create(String type) {
 		
+		ItemState result = null;
 		switch(type) {
 		
 		case "InStockState":
-			return new InStockState();
+			result = new InStockState();
 			break;
-			
 		case "LowStockState":
-			return new LowStockState();
+			result = new LowStockState();
 			break;
-			
 		case "OutOfStockState":
-			return new OutOfStockState();
+			result = new OutOfStockState();
 			break;
-			
 		}
+		return result;
 	}
 }
