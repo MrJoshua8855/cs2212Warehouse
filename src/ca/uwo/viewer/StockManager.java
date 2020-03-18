@@ -31,10 +31,10 @@ public class StockManager extends Viewer implements Runnable {
 	 */
 	private StockManager() {
 		super();
-		 restockDetails.put("apple", 500);
-		 restockDetails.put("pear", 500);
-		 restockDetails.put("mango", 500);
-		 restockDetails.put("onions", 500);
+//		 restockDetails.put("apple", 500);
+//		 restockDetails.put("pear", 500);
+//		 restockDetails.put("mango", 500);
+//		 restockDetails.put("onions", 500);
 				Thread t = new Thread(this);
 				t.start();
 		}
@@ -59,7 +59,7 @@ public class StockManager extends Viewer implements Runnable {
 		System.out.println("restocked with " + restockDetails);
 		Supplier supplier = new Supplier();
 		supplier.supply(restockDetails); 
-		//restockDetails.clear(); //was commented 
+		restockDetails.clear(); //was commented 
 	}
 
 
