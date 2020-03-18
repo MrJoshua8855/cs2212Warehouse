@@ -1,5 +1,6 @@
 package ca.uwo.model.item.states;
 
+import ca.uwo.dataAccess.DataManager;
 import ca.uwo.model.*;
 import ca.uwo.utils.ItemResult;
 import ca.uwo.utils.OrderItem;
@@ -11,21 +12,21 @@ public class OutOfStockState implements ItemState {
 
 	@Override
 	public ItemResult deplete(Item item, int quantity) {
-		//prepare itemResult values and return
-		String message = "Out of Stock";
-		ResponseCode code = ResponseCode.Not_Completed;
-		item.NotifyViewers();
-		return new ItemResult(message, code);
+		item.notifyViewers();
+		item.setState();
+		return new ItemResult("OUT OF STOCK", ResponseCode.Not_Completed);
 	}
 
 	@Override
 	public ItemResult replenish(Item item, int quantity) {
-		ItemRepository repo = new ItemRepository();
-		
-		OrderItem curItem = new OrderItem(item.getName(), quantity);
-		repo.replenishItemStock(curItem);
-		
-		return curItem.getItemResult();
+		int availableQuantity = item.getAvailableQuantity();
+		availableQuantity += quantity;
+		item.setAvailableQuantity(availableQuantity);
+		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
+		//DataManager repo = DataManager.getInstance();
+		//repo.updateItem(item);
+		item.setState();
+		return itemResult;
 	}
 
 }

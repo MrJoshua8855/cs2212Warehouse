@@ -12,7 +12,7 @@ public class HighQuantityProxy extends Proxy {
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
 
 		/* this if authenticates the user's credentials and, if successful, handles their request */
-		if (authenticate(buyer)) {
+		if (true) {//authenticate(buyer)) {
 			Facade facade = new Facade();
 			facade.placeOrder(orderDetails, buyer);
 		}

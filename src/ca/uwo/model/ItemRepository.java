@@ -37,6 +37,7 @@ public class ItemRepository {
 		dataManager.updateItem(chosenItem);
 		orderItem.setItemResult(itemResult);
 		orderItem.setPrice(chosenItem.getPrice());
+		System.out.println("ItemRepo: Stock After Action: " + chosenItem.getAvailableQuantity());
 	}
 
 	/**
@@ -59,6 +60,7 @@ public class ItemRepository {
 		savedItems.put(itemName, chosenItem);
 		dataManager.updateItem(chosenItem);
 		orderItem.setItemResult(itemResult);
+		System.out.println("ItemRepo: Stock After Action: " + chosenItem.getAvailableQuantity());
 	}
 
 	/**

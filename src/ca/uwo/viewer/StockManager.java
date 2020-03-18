@@ -31,21 +31,24 @@ public class StockManager extends Viewer implements Runnable {
 	 */
 	private StockManager() {
 		super();
-		restockDetails.put("apple", 50);
-		restockDetails.put("pear", 50);
-		restockDetails.put("mango", 50);
-		restockDetails.put("onions", 50);
-		Thread t = new Thread(this);
-		t.start();
-	}
+		 restockDetails.put("apple", 500);
+		 restockDetails.put("pear", 500);
+		 restockDetails.put("mango", 500);
+		 restockDetails.put("onions", 500);
+				Thread t = new Thread(this);
+				t.start();
+		}
+
 	
 	/* (non-Javadoc)
 	 * @see ca.uwo.viewer.Viewer#inform(ca.uwo.model.Item)
 	 */
 	@Override
 	public void inform(Item item) {
-		int quantity = restockStrategy.calculateQuantity(item.getName(), item.getAvailableQuantity(), item.getPrice());
-		restockDetails.put(item.getName(), quantity);
+		
+			//int quantity = restockStrategy.calculateQuantity(item.getName(), item.getAvailableQuantity(), item.getPrice());
+			restockDetails.put(item.getName(), 500);
+				
 	}
 
 	// TODO make concurrent
@@ -55,9 +58,10 @@ public class StockManager extends Viewer implements Runnable {
 	public void order() {
 		System.out.println("restocked with " + restockDetails);
 		Supplier supplier = new Supplier();
-		supplier.supply(restockDetails);
-		//restockDetails.clear();
+		supplier.supply(restockDetails); 
+		//restockDetails.clear(); //was commented 
 	}
+
 
 	/**
 	 * set restock strategy for the Item.

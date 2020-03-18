@@ -1,31 +1,43 @@
 package ca.uwo.model.item.states;
 
+import ca.uwo.controller.OperationInterface;
+import ca.uwo.dataAccess.DataManager;
 import ca.uwo.model.Item;
 import ca.uwo.model.ItemRepository;
 import ca.uwo.utils.ItemResult;
 import ca.uwo.utils.OrderItem;
+import ca.uwo.utils.ResponseCode;
 
 
 public class LowStockState implements ItemState {
 
 	@Override
 	public ItemResult deplete(Item item, int quantity) {
-		ItemRepository repo = new ItemRepository();
-		
-		OrderItem curItem = new OrderItem(item.getName(), quantity);
-		repo.depleteItemStock(curItem);
-		
-		return curItem.getItemResult();
+		ItemResult result;
+		if (item.getAvailableQuantity() < quantity) {
+			item.setAvailableQuantity(item.getAvailableQuantity() - quantity);
+			result = new ItemResult("AVAILABLE", ResponseCode.Completed);
+			DataManager repo = DataManager.getInstance();
+			repo.updateItem(item);
+		}
+		else {
+			result = new ItemResult("OUT OF STOCK", ResponseCode.Not_Completed);
+			item.notifyViewers();
+		}
+		item.setState();
+		return result;	
 	}
 
 	@Override
 	public ItemResult replenish(Item item, int quantity) {
-		ItemRepository repo = new ItemRepository();
-		
-		OrderItem curItem = new OrderItem(item.getName(), quantity);
-		repo.replenishItemStock(curItem);
-		
-		return curItem.getItemResult();
+		int availableQuantity = item.getAvailableQuantity();
+		availableQuantity += quantity;
+		item.setAvailableQuantity(availableQuantity);
+		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
+		//DataManager repo = DataManager.getInstance();
+		//repo.updateItem(item);
+		item.setState();
+		return itemResult;
 	}
 
 }
