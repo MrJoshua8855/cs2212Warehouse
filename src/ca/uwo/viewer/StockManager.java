@@ -47,7 +47,7 @@ public class StockManager extends Viewer implements Runnable {
 	public void inform(Item item) {
 		
 			//int quantity = restockStrategy.calculateQuantity(item.getName(), item.getAvailableQuantity(), item.getPrice());
-			restockDetails.put(item.getName(), 500);
+			restockDetails.put(item.getName(), 50);
 				
 	}
 
@@ -84,7 +84,7 @@ public class StockManager extends Viewer implements Runnable {
 
 			System.out.println("Wait for orders to accumulate...");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

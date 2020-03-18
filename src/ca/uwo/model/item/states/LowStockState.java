@@ -14,18 +14,16 @@ public class LowStockState implements ItemState {
 	@Override
 	public ItemResult deplete(Item item, int quantity) {
 		ItemResult result;
-		if (item.getAvailableQuantity() < quantity) {
+		if (item.getAvailableQuantity() >= quantity) {
 			item.setAvailableQuantity(item.getAvailableQuantity() - quantity);
 			result = new ItemResult("AVAILABLE", ResponseCode.Completed);
-			DataManager repo = DataManager.getInstance();
-			repo.updateItem(item);
 		}
 		else {
 			result = new ItemResult("OUT OF STOCK", ResponseCode.Not_Completed);
 			item.notifyViewers();
 		}
 		item.setState();
-		return result;	
+		return result;		
 	}
 
 	@Override
@@ -34,8 +32,6 @@ public class LowStockState implements ItemState {
 		availableQuantity += quantity;
 		item.setAvailableQuantity(availableQuantity);
 		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
-		//DataManager repo = DataManager.getInstance();
-		//repo.updateItem(item);
 		item.setState();
 		return itemResult;
 	}

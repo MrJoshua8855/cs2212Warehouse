@@ -14,8 +14,6 @@ public class InStockState implements ItemState {
 		if (item.getAvailableQuantity() >= quantity) {
 			item.setAvailableQuantity(item.getAvailableQuantity() - quantity);
 			result = new ItemResult("AVAILABLE", ResponseCode.Completed);
-			//DataManager repo = DataManager.getInstance();
-			//repo.updateItem(item);
 		}
 		else {
 			result = new ItemResult("OUT OF STOCK", ResponseCode.Not_Completed);
@@ -31,8 +29,6 @@ public class InStockState implements ItemState {
 		availableQuantity += quantity;
 		item.setAvailableQuantity(availableQuantity);
 		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
-		//DataManager repo = DataManager.getInstance();
-		//repo.updateItem(item);
 		item.setState();
 		return itemResult;
 	}

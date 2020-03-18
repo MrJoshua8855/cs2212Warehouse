@@ -23,8 +23,6 @@ public class OutOfStockState implements ItemState {
 		availableQuantity += quantity;
 		item.setAvailableQuantity(availableQuantity);
 		ItemResult itemResult = new ItemResult("RESTOCKED", ResponseCode.Completed);
-		//DataManager repo = DataManager.getInstance();
-		//repo.updateItem(item);
 		item.setState();
 		return itemResult;
 	}
