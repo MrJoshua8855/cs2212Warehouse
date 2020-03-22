@@ -9,11 +9,24 @@ import ca.uwo.utils.Order;
  */
 public class Controller {
 	
+	private static Controller instance = null;
 	private CreateInvoiceOperation createInvoiceOp;
 	private DepleteStockOperation depleteStockOp;
 	private ReplenishStockOperation replenishStockOp;
 	
+	
 	Order currentOrder = null;
+	
+	/**
+	 * there should be only one instance using the Signleton Design Pattern
+	 * @return the instance.
+	 */
+	public static Controller getInstance() {
+		if(instance == null) {
+			instance = new Controller();
+		}
+		return instance;
+	}
 	
 	/**
 	 * deplete the stock after placing the order.
@@ -49,7 +62,7 @@ public class Controller {
 	/**
 	 * constructor for the Controller.
 	 */
-	public Controller() {
+	private Controller() {
 		depleteStockOp = new DepleteStockOperation();
 		replenishStockOp = new ReplenishStockOperation();
 		createInvoiceOp = new CreateInvoiceOperation();

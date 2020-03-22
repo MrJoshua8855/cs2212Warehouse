@@ -9,6 +9,22 @@ import ca.uwo.client.Supplier;
 import ca.uwo.frontend.Facade;
 
 public class LowQuantityProxy extends Proxy {
+	
+private static LowQuantityProxy instance = null;
+	
+	/**
+	 * there should be only one instance using the Singleton Design Pattern
+	 * @return the instance.
+	 */
+	public static LowQuantityProxy getInstance() {
+		if(instance == null) {
+			instance = new LowQuantityProxy();
+		}
+		return instance;
+	}
+	
+	private LowQuantityProxy() {
+	}
 
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
 
@@ -23,7 +39,7 @@ public class LowQuantityProxy extends Proxy {
 
 		/* case: this proxy cannot handle the request, pass it on */
 		if (count > 10) {
-			HighQuantityProxy proxy = new HighQuantityProxy();
+			HighQuantityProxy proxy = HighQuantityProxy.getInstance();
 			proxy.placeOrder(orderDetails, buyer);
 		}
 
@@ -32,7 +48,7 @@ public class LowQuantityProxy extends Proxy {
 
 			/* this if authenticates the user's credentials and, if successful, handles their request */
 			if (true) {//(authenticate(buyer)) {
-				Facade facade = new Facade();
+				Facade facade = Facade.getInstance();
 				facade.placeOrder(orderDetails, buyer);
 			}
 
@@ -42,7 +58,7 @@ public class LowQuantityProxy extends Proxy {
 
 				/* try again, handle request upon success */
 				if (authenticate(buyer)) {
-					Facade facade = new Facade();
+					Facade facade = Facade.getInstance();
 					facade.placeOrder(orderDetails, buyer);
 				}
 

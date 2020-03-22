@@ -7,16 +7,31 @@ import ca.uwo.client.Supplier;
 //import ca.uwo.frontend.Facade;
 
 public class WelcomeProxy extends Proxy {
+
+	private static WelcomeProxy instance = null;
+	
+	/**
+	 * there should be only one instance using the Singleton Design Pattern
+	 * @return the instance.
+	 */
+	public static WelcomeProxy getInstance() {
+		if(instance == null) {
+			instance = new WelcomeProxy();
+		}
+		return instance;
+	}
+	
 	/**
 	 * constructor for WelcomeProxy class.
 	 */
-	public WelcomeProxy() {
+	private WelcomeProxy() {
 	}
+	
 
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
 		
-		SupplierProxy proxy = new SupplierProxy();
+		SupplierProxy proxy = SupplierProxy.getInstance();
 		proxy.placeOrder(orderDetails, buyer);
 
 	}
@@ -24,7 +39,7 @@ public class WelcomeProxy extends Proxy {
 	@Override
 	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {
 
-		SupplierProxy proxy = new SupplierProxy();
+		SupplierProxy proxy = SupplierProxy.getInstance();
 		proxy.restock(restockDetails, supplier);
 
 	}

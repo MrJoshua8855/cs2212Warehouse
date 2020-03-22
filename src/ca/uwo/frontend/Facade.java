@@ -8,6 +8,7 @@ import ca.uwo.client.Buyer;
 import ca.uwo.client.Supplier;
 import ca.uwo.controller.Controller;
 import ca.uwo.frontend.interfaces.FacadeCommands;
+import ca.uwo.model.ItemRepository;
 import ca.uwo.utils.Invoice;
 import ca.uwo.utils.Order;
 import ca.uwo.utils.OrderItem;
@@ -19,15 +20,30 @@ import ca.uwo.utils.OrderItem;
  * {@link ca.uwo.controller.Controller} for the interface implementations.
  */
 public class Facade implements FacadeCommands {
+	
+	private static Facade instance = null;
 	private Controller controller;
 	private BankingTransactions bank;
+	
+	
+	
+	/**
+	 * there should be only one instance using the Singleton Design Pattern
+	 * @return the instance.
+	 */
+	public static Facade getInstance() {
+		if(instance == null) {
+			instance = new Facade();
+		}
+		return instance;
+	}
 	
 	/**
 	 * constructor for Facade class.
 	 */
-	public Facade() {
+	private Facade() {
 		super();
-		this.controller = new Controller();
+		this.controller = Controller.getInstance();
 		this.bank = new BankingTransactions();
 	}
 	

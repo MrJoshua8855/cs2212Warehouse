@@ -8,12 +8,29 @@ import ca.uwo.client.Supplier;
 import ca.uwo.frontend.Facade;
 
 public class HighQuantityProxy extends Proxy {
+	
+	private static HighQuantityProxy instance = null;
+	
+	/**
+	 * there should be only one instance using the Singleton Design Pattern
+	 * @return the instance.
+	 */
+	public static HighQuantityProxy getInstance() {
+		if(instance == null) {
+			instance = new HighQuantityProxy();
+		}
+		return instance;
+	}
+	
+	private HighQuantityProxy() {
+	}
+	
 
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
 
 		/* this if authenticates the user's credentials and, if successful, handles their request */
 		if (true) {//authenticate(buyer)) {
-			Facade facade = new Facade();
+			Facade facade = Facade.getInstance();
 			facade.placeOrder(orderDetails, buyer);
 		}
 
@@ -23,7 +40,7 @@ public class HighQuantityProxy extends Proxy {
 
 			/* try again, handle request upon success */
 			if (authenticate(buyer)) {
-				Facade facade = new Facade();
+				Facade facade = Facade.getInstance();
 				facade.placeOrder(orderDetails, buyer);
 			}
 
