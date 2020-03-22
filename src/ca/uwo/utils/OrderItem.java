@@ -74,15 +74,15 @@ public class OrderItem {
 		this.quantity = quantity;
 		this.price = -1.0;
 		this.itemResult = null;
+		pricingStrategy = IndividualPricingStrategyRepo.getInstance().getStrategy(this.itemName);
 	}
 
 	/**
 	 * calculate the price for the item.
 	 * @return itemPrice the price of the item.
 	 */
-	public double calculateItemPrice() {
-		double itemPrice = quantity * price;
-		return itemPrice;
+	public double calculateItemPrice() {		
+		return pricingStrategy.calculate(quantity, price);
 	}
 
 }
