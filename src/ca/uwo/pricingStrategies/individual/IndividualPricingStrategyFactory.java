@@ -6,6 +6,8 @@ public class IndividualPricingStrategyFactory {
 		switch(type) {
 		case "test":
 			return new IndividualPricingStrategy2();
+		case "strategy2":
+			return new IndividualPricingStrategy2();
 		default:
 			return new IndividualPricingStrategy1();
 		}
